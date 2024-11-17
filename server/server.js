@@ -2,19 +2,22 @@ const express = require("express");
 const dotenv = require("dotenv");
 const {Leap} = require("@leap-ai/sdk");
 const cors = require("cors");
-
 const app = express();
 dotenv.config();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: '*'
+  
+}));
 const port = 8000;
 
 const leap = new Leap(process.env.LEAP_API_KEY);
 
 
-
 app.post("/generate",async (req, res) => {
   const prompt = req.body.prompt;
+  console.log(prompt,"gkjdasgajk");
+  
   try {
    // leap.usePublicModel("sd-1.5");
     const response = await leap.generate.generateImage({

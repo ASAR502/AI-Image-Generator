@@ -21,8 +21,7 @@ const Hero = () => {
       };
     });
 
-    const xx= process.env.NEXT_PUBLIC_DOMAIN;
-    console.log(xx);
+    const xx= "http://localhost:8000"
     const url = `${xx}/generate`;
     const data = {
       prompt: x,
@@ -36,13 +35,14 @@ const Hero = () => {
         },
         body: JSON.stringify(data),
       });
-
+          
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
 
       const result = await response.json();
       console.log(result.image);
+    
       setAiState((prev) => {
         return {
           ...prev,
@@ -50,6 +50,8 @@ const Hero = () => {
           isLoading: false,
         };
       });
+      setX("");
+      
     } catch (err) {
       console.log("error occured " + err);
       setAiState((prev) => {
@@ -85,7 +87,7 @@ const Hero = () => {
         </Button>
       </div>
       <Leaf />
-      <p >Developed by Azad</p>
+      <p className="text-fuchsia-600" >Developed by Aaquib Shahzada</p>
     </div>
   );
 };
